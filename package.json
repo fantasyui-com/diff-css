@@ -3,19 +3,18 @@
   "bin": {
     "diff-css": "./index.js"
   },
-  "author": "fantasyui-com",
+  "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/fantasyui-com/diff-css"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command to compare two CSS files and list changes.",
   "main": "index.js",
   "scripts": {
     "test": "node test.js test/old.css test/new.css && echo 'PASS'"
   },
   "keywords": [],
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
