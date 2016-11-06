@@ -6,6 +6,9 @@ const program = require('./program.js');
 setup
   .version('1.0.0')
   .usage('[options] <old.css> <new.css>')
+  
+  .option('-d, --deleted', 'List deleted classes and exit.')
+
   .option('-r, --reporter <type>', 'reporter name [json|text]', 'text');
 
 setup.parse(process.argv);

@@ -53,6 +53,13 @@ module.exports = function(setup, data, done){
         }
       });
 
+      if(setup.deleted){
+         report.data.deleted.map(name => console.log(name));
+         return;
+      }
+
+
+
 
       if(setup.reporter === 'json'){
         console.log(JSON.stringify(report, null, '  '));
