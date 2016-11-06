@@ -13,8 +13,15 @@ module.exports = function(setup, data, done){
 
     Promise.all([listCssClasses({css:olderString}), listCssClasses({css:newerString})]).then(values => {
 
-      let olderList = values[0].selectors;
-      let newerList = values[1].selectors;
+
+      // values[*] holds array of class names unprefixed with a "."
+
+      let olderList = values[0].classNames;
+      let olderSet = new Set(olderList);
+
+      let newerList = values[1].classNames;
+      let newerSet = new Set(newerList);
+
 
       // Strategy: create an object that can be used as "JSON reporter",
       // and then just print it out as text if reporter is type text.
@@ -23,24 +30,25 @@ module.exports = function(setup, data, done){
         meta:{
           olderFilename,
           newerFilename,
-          olderSelectorCount: Object.keys(olderList).length,
-          newerSelectorCount: Object.keys(newerList).length,
+          olderSelectorCount: olderList.length,
+          newerSelectorCount: newerList.length,
         },
         data:{
+          // initialise to empty
           deleted:[],
           created:[]
         },
       };
 
 
-      Object.keys(olderList).sort().forEach(name => {
-        if(!newerList[name]){
+      olderList.forEach(name => {
+        if(!newerSet.has(name)){
           report.data.deleted.push(name);
         }
       });
 
-      Object.keys(newerList).sort().forEach(name => {
-        if(!olderList[name]){
+      newerList.forEach(name => {
+        if(!olderSet.has(name)){
           report.data.created.push(name);
         }
       });
@@ -54,7 +62,6 @@ module.exports = function(setup, data, done){
 
       console.warn('Older has %s selectors', report.meta.olderSelectorCount);
       console.warn('Newer has %s selectors', report.meta.newerSelectorCount);
-
       console.warn(`\nList of ${olderFilename} classes removed from ${newerFilename}:\n`)
       report.data.deleted.map(name => console.log(name));
       console.warn(`\nList of new classes added to ${newerFilename}:\n`)
