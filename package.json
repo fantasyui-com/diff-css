@@ -17,7 +17,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.20.1",
+    "commander": "^2.20.3",
     "list-css-classes": "^1.2.0"
   }
 }
