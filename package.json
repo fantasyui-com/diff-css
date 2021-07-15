@@ -3,7 +3,7 @@
   "bin": {
     "diff-css": "./index.js"
   },
-  "author": "",
+  "author": "fantasyui.com <fantasyui.com@gmail.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/fantasyui-com/diff-css"
@@ -12,7 +12,8 @@
   "description": "Command to compare two CSS files and list changes.",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js test/old.css test/new.css && echo 'PASS'"
+    "test": "node test.js test/old.css test/new.css && echo 'PASS'",
+    "save": "git add .; git commit -m 'New Release'; git push; npm version patch; npm publish; git push;"
   },
   "keywords": [],
   "license": "MIT",
